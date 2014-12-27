@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Zippr. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "TDAppDelegate.h"
 
-@interface AppDelegate ()
+@interface TDAppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation TDAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
