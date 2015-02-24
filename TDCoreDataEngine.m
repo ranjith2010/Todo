@@ -37,8 +37,7 @@
 - (void)create:(TDListInfo*)listInfo :(void(^)(BOOL succeeded))block{
     NSEntityDescription *entityDesc = [NSEntityDescription entityForName:kListInfoEntityName
                                                       inManagedObjectContext:moc];
-    CDListInfo *newCDListInfo = (CDListInfo*)[[NSManagedObject alloc] initWithEntity:entityDesc
-                                               insertIntoManagedObjectContext:moc];
+    CDListInfo *newCDListInfo = (CDListInfo*)[[NSManagedObject alloc] initWithEntity:entityDesc insertIntoManagedObjectContext:moc];
     newCDListInfo.name = listInfo.name;
     newCDListInfo.message = listInfo.message;
     newCDListInfo.creationDate = listInfo.creationDate;
@@ -94,7 +93,9 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name=%@",listName];
     [fetchRequest setPredicate:predicate];
     NSArray * arrayOfCDListInfo = [moc executeFetchRequest:fetchRequest error:&error];
+    if(arrayOfCDListInfo.count){
     [moc deleteObject:[arrayOfCDListInfo firstObject]];
+    }
     if([moc save:&error]==NO){
         block(NO);
     }

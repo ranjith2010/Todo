@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sJb-EY-JaF">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="sJb-EY-JaF">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
@@ -81,7 +81,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RMk-HV-A8O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1016" y="-335"/>
+            <point key="canvasLocation" x="842" y="-393"/>
         </scene>
         <!--List-->
         <scene sceneID="ByO-PB-zMf">
@@ -161,45 +161,53 @@
                                 </items>
                             </navigationBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gE3-mp-oup">
-                                <rect key="frame" x="0.0" y="59" width="331" height="509"/>
+                                <rect key="frame" x="0.0" y="59" width="320" height="493"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rA4-qO-J7r">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="516"/>
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iTz-Hj-YgM">
+                                                <rect key="frame" x="16" y="22" width="296" height="30"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="dismissKeyboard:" destination="nm2-zE-SzM" eventType="editingDidEndOnExit" id="Ts0-7u-kwT"/>
+                                                </connections>
+                                            </textField>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Message" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MQM-sA-54B">
+                                                <rect key="frame" x="16" y="67" width="294" height="30"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <connections>
+                                                    <action selector="dismissKeyboard:" destination="nm2-zE-SzM" eventType="editingDidEndOnExit" id="nwg-aq-NW9"/>
+                                                </connections>
+                                            </textField>
+                                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="LGf-PH-IqK">
+                                                <rect key="frame" x="12" y="114" width="296" height="162"/>
+                                                <date key="date" timeIntervalSinceReferenceDate="442153797.77503198">
+                                                    <!--2015-01-05 12:29:57 +0000-->
+                                                </date>
+                                            </datePicker>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
                             </scrollView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3Mv-G9-WNC">
-                                <rect key="frame" x="13" y="76" width="288" height="30"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="dismissKeyboard:" destination="nm2-zE-SzM" eventType="editingDidEndOnExit" id="l9C-Yn-rMW"/>
-                                </connections>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Message" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xma-hm-BJs">
-                                <rect key="frame" x="13" y="125" width="288" height="30"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <action selector="dismissKeyboard:" destination="nm2-zE-SzM" eventType="editingDidEndOnExit" id="hLR-kR-tau"/>
-                                </connections>
-                            </textField>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="dFL-Wo-cDN">
-                                <rect key="frame" x="15" y="169" width="283" height="162"/>
-                                <date key="date" timeIntervalSinceReferenceDate="440926005.65845001">
-                                    <!--2014-12-22 07:26:45 +0000-->
-                                </date>
-                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="datePickerProperty" destination="dFL-Wo-cDN" id="kqz-pi-iyH"/>
-                        <outlet property="messageTextField" destination="Xma-hm-BJs" id="itN-KT-I2F"/>
-                        <outlet property="nameTextField" destination="3Mv-G9-WNC" id="AdU-cL-vH1"/>
+                        <outlet property="datePickerProperty" destination="LGf-PH-IqK" id="J5n-sn-quM"/>
+                        <outlet property="messageTextField" destination="MQM-sA-54B" id="bfT-Ii-hdY"/>
+                        <outlet property="nameTextField" destination="iTz-Hj-YgM" id="Q46-rB-PE1"/>
                         <outlet property="saveBtnProperty" destination="Gkc-nC-zBL" id="YAW-Zv-Elf"/>
                         <outlet property="scroller" destination="gE3-mp-oup" id="AGV-6P-T0R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PQ9-OB-6La" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1356" y="289"/>
+            <point key="canvasLocation" x="1356" y="288"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dwg-si-jCw">

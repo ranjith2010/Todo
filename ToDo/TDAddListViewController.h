@@ -15,9 +15,9 @@
 
 @property(nonatomic,strong)TDListInfo *listInfo;
 
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *messageTextField;
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePickerProperty;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveBtnProperty;
+#pragma mark - Belongs to TestCase
+
+- (BOOL)initialDataCheckUp:(TDListInfo*)listInfo;
+- (void)saveList:(TDListInfo*)listInfo :(void(^)(BOOL succeeded))block;
 
 @end

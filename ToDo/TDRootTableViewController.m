@@ -15,6 +15,8 @@
 
 @interface TDRootTableViewController ()<UITableViewDataSource,UITableViewDelegate>
 
+@property (nonatomic,strong) id<TDLocalInterface> caller;
+
 @end
 
 @implementation TDRootTableViewController{
@@ -26,11 +28,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.caller = [TDLocal defaultLocalDB];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     refreshControl = [[UIRefreshControl alloc]init];
     [self.tableView addSubview:refreshControl];
-    [refreshControl addTarget:self action:@selector(pr_refreshTable) forControlEvents:UIControlEventValueChanged];
+    [refreshControl addTarget:self action:@selector(fetchList) forControlEvents:UIControlEventValueChanged];
     dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
@@ -39,15 +42,16 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self pr_refreshTable];
+    [self fetchList];
     
 }
 
 #pragma mark - Private API
 
-- (void)pr_refreshTable {
-    [[TDLocal defaultLocalDB] fetch:^(NSMutableArray *arrayOfLocalList){
+- (void)fetchList {
+    [self.caller fetch:^(NSMutableArray *arrayOfLocalList){
         if(arrayOfLocalList.count){
+            NSLog(@"Persisted List: %@",arrayOfLocalList);
             self.listDataSource = arrayOfLocalList;
             [refreshControl endRefreshing];
             [self.tableView reloadData];
@@ -144,11 +148,13 @@
     if (buttonIndex == 0) {
         if(toDeleteIndexPath.section==0){
             TDListInfo *listInfo = [self.listDataSource objectAtIndex:toDeleteIndexPath.row];
-            [[TDLocal defaultLocalDB] deleteList:listInfo.name :^(BOOL succeeded){
+            [self deleteList:listInfo.name :^(BOOL succeeded){
                 if(succeeded){
+                        NSLog(@"%@ deleted successfully",listInfo.name);
                     [self.listDataSource removeObjectAtIndex:toDeleteIndexPath.row];
                     [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:toDeleteIndexPath]
                                           withRowAnimation:UITableViewRowAnimationFade];
+
                 }
             }];
         }
@@ -156,6 +162,12 @@
     else{
         [self.tableView reloadData];
     }
+}
+
+- (void)deleteList:(NSString*)listName :(void(^)(BOOL succeeded))block{
+    [self.caller deleteList:listName :^(BOOL succeeded){
+        block(succeeded);
+    }];
 }
 
 #pragma mark -

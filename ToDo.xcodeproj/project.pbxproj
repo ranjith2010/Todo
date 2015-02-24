@@ -24,6 +24,7 @@
 		C692074D1A4816FF00E88444 /* TDConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = C692074C1A4816FF00E88444 /* TDConstants.m */; };
 		C69207501A4819A300E88444 /* CDListInfo+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C692074F1A4819A300E88444 /* CDListInfo+Additions.m */; };
 		C69207931A485C1300E88444 /* TDDisplayListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C69207921A485C1300E88444 /* TDDisplayListViewController.m */; };
+		C69A0A2C1A9C59780002E0C0 /* NSString+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = C69A0A2B1A9C59780002E0C0 /* NSString+Additions.m */; };
 		C6C1BE721A49BBF000F04EC0 /* CDListInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = C6C1BE711A49BBF000F04EC0 /* CDListInfo.m */; };
 /* End PBXBuildFile section */
 
@@ -50,7 +51,7 @@
 		C69207131A47FD0B00E88444 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		C69207191A47FD0B00E88444 /* ToDoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C692071E1A47FD0B00E88444 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C692071F1A47FD0B00E88444 /* ToDoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ToDoTests.m; sourceTree = "<group>"; };
+		C692071F1A47FD0B00E88444 /* ToDoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ToDoTests.m; path = ToDoTests/ToDoTests.m; sourceTree = SOURCE_ROOT; };
 		C69207291A47FFC600E88444 /* TDAddListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAddListViewController.h; sourceTree = "<group>"; };
 		C692072A1A47FFC600E88444 /* TDAddListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDAddListViewController.m; sourceTree = "<group>"; };
 		C692072E1A48015B00E88444 /* TDCoreDataSharedInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDCoreDataSharedInstance.h; sourceTree = "<group>"; };
@@ -70,6 +71,8 @@
 		C692074F1A4819A300E88444 /* CDListInfo+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CDListInfo+Additions.m"; sourceTree = "<group>"; };
 		C69207911A485C1300E88444 /* TDDisplayListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDDisplayListViewController.h; sourceTree = "<group>"; };
 		C69207921A485C1300E88444 /* TDDisplayListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDDisplayListViewController.m; sourceTree = "<group>"; };
+		C69A0A2A1A9C59780002E0C0 /* NSString+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Additions.h"; sourceTree = "<group>"; };
+		C69A0A2B1A9C59780002E0C0 /* NSString+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Additions.m"; sourceTree = "<group>"; };
 		C6C1BE701A49BBF000F04EC0 /* CDListInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDListInfo.h; sourceTree = "<group>"; };
 		C6C1BE711A49BBF000F04EC0 /* CDListInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDListInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -224,6 +227,8 @@
 			children = (
 				C692074E1A4819A300E88444 /* CDListInfo+Additions.h */,
 				C692074F1A4819A300E88444 /* CDListInfo+Additions.m */,
+				C69A0A2A1A9C59780002E0C0 /* NSString+Additions.h */,
+				C69A0A2B1A9C59780002E0C0 /* NSString+Additions.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -345,6 +350,7 @@
 				C692070C1A47FD0B00E88444 /* TDRootTableViewController.m in Sources */,
 				C692073F1A4803E600E88444 /* Model.xcdatamodeld in Sources */,
 				C69207091A47FD0B00E88444 /* TDAppDelegate.m in Sources */,
+				C69A0A2C1A9C59780002E0C0 /* NSString+Additions.m in Sources */,
 				C69207501A4819A300E88444 /* CDListInfo+Additions.m in Sources */,
 				C69207461A480B6B00E88444 /* TDListInfo.m in Sources */,
 				C6C1BE721A49BBF000F04EC0 /* CDListInfo.m in Sources */,

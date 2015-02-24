@@ -7,11 +7,18 @@
 //
 
 #import "TDAddListViewController.h"
-
 #import "TDLocal.h"
 #import "TDLocalInterface.h"
+#import "NSString+Additions.h"
 
 @interface TDAddListViewController ()
+
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *messageTextField;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePickerProperty;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveBtnProperty;
+
+@property (nonatomic,strong) id<TDLocalInterface> caller;
 
 @end
 
@@ -21,24 +28,41 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Here No need to call the defaultLocalDB all the time.
+    // Just trigger once and get the instance of localDB and set into the Property.
+    self.caller = [TDLocal defaultLocalDB];
     dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     [scroller setScrollEnabled:YES];
-    [scroller setContentSize:CGSizeMake(320, 800)];
-    [self pr_initialDataSetup];
+   // [scroller setContentSize:CGSizeMake(320, 800)];
+    [self initialDataCheckUp:self.listInfo];
 }
 
-#pragma mark - Private API
+#pragma mark - Belongs to TestCase
 
-- (void)pr_initialDataSetup{
-    if(_listInfo){
-        _nameTextField.text = _listInfo.name;
-        _messageTextField.text = _listInfo.message;
-        _datePickerProperty.date = [dateFormatter dateFromString:_listInfo.expirationDate];
+- (BOOL)initialDataCheckUp:(TDListInfo*)listInfo{
+    if(listInfo && ![listInfo.name isEqualToString:@""]){
+        _nameTextField.text = listInfo.name;
+        _messageTextField.text = listInfo.message;
+        _datePickerProperty.date = [dateFormatter dateFromString:listInfo.expirationDate];
+        return YES;
+    }
+    else{
+        return NO;
     }
 }
 
+- (void)saveList:(TDListInfo*)listInfo :(void(^)(BOOL succeeded))block{
+    [self.caller create:listInfo :^(BOOL succeeded){
+        if(succeeded){
+            block(succeeded);
+            [self CancelBtn:Nil];
+        }
+    }];
+}
+
+#pragma mark -
 
 #pragma mark - Button Action API
 
@@ -48,20 +72,29 @@
 - (IBAction)CancelBtn:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 - (IBAction)saveBtn:(id)sender {
-    if(![_nameTextField.text isEqualToString:@""]){
-    if(_listInfo){
+    NSString *errorMsg = Nil;
+    if([_nameTextField.text isEmpty]) {
+        errorMsg = @"Don't go with Emptie Name?";
+    }
+    else if ([self.messageTextField.text isEmpty]) {
+        errorMsg = @"Don't go with Emptie Message?";
+    }
+    if(errorMsg) {
+        UIAlertView *errorAlert = [[UIAlertView alloc]initWithTitle:@"Error:" message:errorMsg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [errorAlert show];
+        return;
+    }
+    if(self.listInfo) {
         [self pr_updateWithExistingListInfo];
     }
-    else{
+    else {
         [self pr_createListInfo];
     }
-    }
-    else{
-        UIAlertView *errorAlert = [[UIAlertView alloc]initWithTitle:@"Caution:" message:@"Don't go with Emptie Name?" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-        [errorAlert show];
-    }
 }
+
+
 
 
 - (void)pr_updateWithExistingListInfo{
@@ -70,7 +103,7 @@
     [self.listInfo setMessage:_messageTextField.text];
 
     [self.listInfo setExpirationDate:[dateFormatter stringFromDate:_datePickerProperty.date]];
-    [[TDLocal defaultLocalDB]update:self.listInfo withExistingName:existingListName :^(BOOL succeeded){
+    [self.caller update:self.listInfo withExistingName:existingListName :^(BOOL succeeded){
         if(succeeded){
             NSLog(@"Successfully updated New values");
             [self CancelBtn:nil];
@@ -86,7 +119,7 @@
     [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     [listInfo setExpirationDate:[dateFormatter stringFromDate:_datePickerProperty.date]];
     [listInfo setCreationDate:[dateFormatter stringFromDate:[NSDate date]]];
-    [[TDLocal defaultLocalDB] create:listInfo :^(BOOL succeeded){
+    [self.caller create:listInfo :^(BOOL succeeded){
         if(succeeded){
             NSLog(@"List has been Created!");
             [self CancelBtn:Nil];

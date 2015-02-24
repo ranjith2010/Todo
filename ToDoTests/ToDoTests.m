@@ -8,8 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "TDListInfo.h"
+#import "TDAddListViewController.h"
+#import "TDRootTableViewController.h"
 
-@interface ToDoTests : XCTestCase
+
+@interface ToDoTests : XCTestCase{
+    TDListInfo *listInfo;
+    TDAddListViewController *addListVC;
+    TDRootTableViewController *rootTVC;
+}
 
 @end
 
@@ -17,7 +25,12 @@
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    addListVC = [[TDAddListViewController alloc]init];
+    listInfo = [[TDListInfo alloc]init];
+    rootTVC  = [[TDRootTableViewController alloc]init];
+    [listInfo setName:@"Have a Tea"];
+    [listInfo setMessage:@"Going for Tea with Ramesh"];
+    [listInfo setExpirationDate:@"Today @7pm"];
 }
 
 - (void)tearDown {
@@ -25,10 +38,29 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+#pragma mark - CRUD Process with List
+
+- (void)testCheckWitListHasData{
+    BOOL isItValidList=[addListVC initialDataCheckUp:listInfo];
+    XCTAssertTrue(isItValidList,@"List is not Created");
 }
+
+- (void)testStoreListIntoCoredata{
+    [addListVC saveList:listInfo :^(BOOL succeeded){
+        XCTAssertTrue(succeeded,@"List is not Stored into Coredata");
+    }];
+}
+
+- (void)testFetchAllList{
+    [rootTVC fetchList];
+}
+
+- (void)testDeleteList{
+    [rootTVC deleteList:listInfo.name :^(BOOL succedeed){
+        XCTAssertTrue(succedeed,@"Delete is not done");
+    }];
+}
+
 
 - (void)testPerformanceExample {
     // This is an example of a performance test case.

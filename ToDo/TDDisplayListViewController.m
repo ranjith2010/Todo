@@ -12,6 +12,7 @@
 #import "TDLocalInterface.h"
 
 @interface TDDisplayListViewController ()
+@property (nonatomic,strong) id<TDLocalInterface> caller;
 
 @end
 
@@ -19,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.caller = [TDLocal defaultLocalDB];
     [scroller setScrollEnabled:YES];
     [scroller setContentSize:CGSizeMake(320, 800)];
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc]
@@ -33,7 +35,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if(self.listInfo){
-        [[TDLocal defaultLocalDB] fetch:^(NSMutableArray *arrayOfLists){
+        [self.caller fetch:^(NSMutableArray *arrayOfLists){
             if(arrayOfLists.count){
                 for(TDListInfo *listInfo in arrayOfLists){
                     if([listInfo.name isEqualToString:self.listInfo.name]){

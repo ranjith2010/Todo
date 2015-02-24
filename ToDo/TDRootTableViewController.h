@@ -12,5 +12,10 @@
 
 @property(nonatomic,strong)NSMutableArray *listDataSource;
 
+#pragma mark - Test Case
+
+- (void)fetchList;
+- (void)deleteList:(NSString*)listName :(void(^)(BOOL succeeded))block;
+
 @end
 
